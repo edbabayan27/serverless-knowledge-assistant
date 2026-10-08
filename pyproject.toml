@@ -1,0 +1,36 @@
+[project]
+name = "serverless-knowledge-assistant"
+version = "0.1.0"
+description = "Serverless RAG proof of concept: ask natural-language questions about the AWS Serverless Applications Lens."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    # boto3 is bundled into the Lambda package (pinned by uv.lock) instead of relying on the
+    # version that ships with the Lambda runtime. S3 Vectors needs a recent SDK.
+    "boto3>=1.40",
+    "pypdf>=6.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+    "ruff>=0.16",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.28,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "knowledge_assistant"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
