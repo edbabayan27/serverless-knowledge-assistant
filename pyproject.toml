@@ -13,8 +13,17 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    # Builds small PDFs with an outline and page labels for the chunking tests.
+    "fpdf2>=2.8",
     "pytest>=9.0",
     "ruff>=0.16",
+]
+
+# Only needed to run scripts/eval_retrieval.py: uv run --group eval python scripts/eval_retrieval.py
+eval = [
+    "fastembed>=0.7",
+    "numpy>=2.0",
+    "openpyxl>=3.1",
 ]
 
 [build-system]

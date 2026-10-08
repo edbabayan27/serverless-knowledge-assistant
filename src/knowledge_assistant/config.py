@@ -14,6 +14,10 @@ DEFAULT_EMBEDDING_MODEL_ID = "amazon.titan-embed-text-v2:0"
 DEFAULT_EMBEDDING_DIMENSIONS = 1024
 # Titan Text Embeddings v2 only supports these output sizes; anything else fails at the first call.
 TITAN_V2_DIMENSIONS = frozenset({256, 512, 1024})
+# About 330 tokens per chunk. On the Serverless Applications Lens this gives ~140 chunks; most
+# sections fit in one or two chunks, so answers can cite a single section and page range.
+DEFAULT_CHUNK_SIZE_WORDS = 250
+DEFAULT_CHUNK_OVERLAP_WORDS = 50
 
 # Every environment variable this module reads. Tests clear these so the shell can't leak in.
 ENV_VARS = (
@@ -121,8 +125,8 @@ class IngestSettings:
             documents_bucket=_required("DOCUMENTS_BUCKET_NAME"),
             document_url=_required("DOCUMENT_URL"),
             document_id=_required("DOCUMENT_ID"),
-            chunk_size_words=_int("CHUNK_SIZE_WORDS", 200),
-            chunk_overlap_words=_int("CHUNK_OVERLAP_WORDS", 40, minimum=0),
+            chunk_size_words=_int("CHUNK_SIZE_WORDS", DEFAULT_CHUNK_SIZE_WORDS),
+            chunk_overlap_words=_int("CHUNK_OVERLAP_WORDS", DEFAULT_CHUNK_OVERLAP_WORDS, minimum=0),
         )
         if not settings.document_url.startswith("https://"):
             raise ConfigError(

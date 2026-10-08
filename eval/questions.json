@@ -1,0 +1,215 @@
+{
+  "description": "Retrieval evaluation set for the AWS Serverless Applications Lens (July 14, 2022 edition). Each question has one or more evidence quotes copied from the document; a retrieved context counts as a hit when it contains any of them. 'keyword' questions reuse the document's technical terms, 'paraphrase' questions describe the problem in other words.",
+  "questions": [
+    {
+      "id": "q01",
+      "type": "paraphrase",
+      "question": "How can I stop clients from sending more requests than my API can handle?",
+      "evidence": ["Throttling should be enabled at the API level"],
+      "section": "Reliability pillar > Foundations > Throttling"
+    },
+    {
+      "id": "q02",
+      "type": "keyword",
+      "question": "Should I use API Gateway API keys for authorization?",
+      "evidence": ["API Gateway API Keys is not a security mechanism", "API keys are not a security mechanism to authorize requests"],
+      "section": "Security pillar > Identity and access management"
+    },
+    {
+      "id": "q03",
+      "type": "paraphrase",
+      "question": "What should happen to events that keep failing in asynchronous processing?",
+      "evidence": ["Use a dead-letter queue mechanism to retain, investigate, and retry failed transactions"],
+      "section": "Reliability pillar > Failure management"
+    },
+    {
+      "id": "q04",
+      "type": "keyword",
+      "question": "How does RDS Proxy help Lambda functions that talk to a relational database?",
+      "evidence": ["Amazon RDS Proxy handles the connection pooling necessary for scaling simultaneous connections", "consider connection pooling with Amazon RDS Proxy"],
+      "section": "Performance efficiency pillar > Optimize > AWS Lambda"
+    },
+    {
+      "id": "q05",
+      "type": "paraphrase",
+      "question": "How do I avoid latency spikes from cold starts when traffic goes up?",
+      "evidence": ["To enable your function to scale without fluctuations in latency, use provisioned concurrency"],
+      "section": "Performance efficiency pillar > Selection > AWS Lambda"
+    },
+    {
+      "id": "q06",
+      "type": "keyword",
+      "question": "When should I choose an edge-optimized API Gateway endpoint instead of a regional one?",
+      "evidence": ["Use Edge endpoints for geographically dispersed customers", "Edge-optimized APIs provide a fully managed Amazon CloudFront distribution to optimize access for geographically dispersed consumers"],
+      "section": "Performance efficiency pillar > Selection"
+    },
+    {
+      "id": "q07",
+      "type": "paraphrase",
+      "question": "What is the longest time a fast, high-volume Step Functions workflow can run?",
+      "evidence": ["compared to 5 minutes for an Express Workflow", "They can run for up to five minutes"],
+      "section": "Performance efficiency pillar > Selection > AWS Step Functions"
+    },
+    {
+      "id": "q08",
+      "type": "paraphrase",
+      "question": "How can I lower what I pay for my Lambda functions' logs?",
+      "evidence": ["Set log retention periods for new and existing CloudWatch Logs groups", "Set appropriate logging levels and remove unnecessary logging information to optimize log ingestion"],
+      "section": "Cost optimization pillar > Optimizing over time > Logging ingestion and storage"
+    },
+    {
+      "id": "q09",
+      "type": "keyword",
+      "question": "Why use the CloudWatch Embedded Metric Format instead of the PutMetricData API?",
+      "evidence": ["with EMF you do not pay the per request charge of the CloudWatch PutMetricData API"],
+      "section": "Cost optimization pillar > Optimizing over time > Logging ingestion and storage"
+    },
+    {
+      "id": "q10",
+      "type": "paraphrase",
+      "question": "Is it fine for several functions to share one set of permissions?",
+      "evidence": ["sharing an IAM role within more than one Lambda function will likely violate least-privileged access"],
+      "section": "Security pillar > Identity and access management"
+    },
+    {
+      "id": "q11",
+      "type": "paraphrase",
+      "question": "How do I release new function code to a small share of users first and undo it automatically if errors appear?",
+      "evidence": ["You can use Lambda function aliases with AWS CodeDeploy to support various canary deployment strategies", "CloudWatch alarms to trigger automated rollback"],
+      "section": "Definitions > Deployment approaches > Canary deployments"
+    },
+    {
+      "id": "q12",
+      "type": "keyword",
+      "question": "What timeout should the Lambda function of an Alexa skill have?",
+      "evidence": ["Ensure that your Lambda function timeout is less than eight seconds"],
+      "section": "Scenarios > Alexa skills > Configuration notes"
+    },
+    {
+      "id": "q13",
+      "type": "paraphrase",
+      "question": "How do I make sure that receiving the same event twice doesn't cause problems?",
+      "evidence": ["Operations triggered from requests or events must be idempotent", "Design your applications to process multiple identical requests to have the same effect as making a single request"],
+      "section": "Design principles; Reliability pillar > Foundations > Best practices"
+    },
+    {
+      "id": "q14",
+      "type": "paraphrase",
+      "question": "Where should I keep database passwords and other credentials?",
+      "evidence": ["Store your secrets, such as database passwords or API keys, in a secrets manager", "Store sensitive data using AWS Secrets Manager"],
+      "section": "Security pillar > Data protection"
+    },
+    {
+      "id": "q15",
+      "type": "keyword",
+      "question": "Can moving Lambda functions to Graviton (ARM) processors reduce cost?",
+      "evidence": ["consider configuring new and existing functions to run on ARM or Graviton processors"],
+      "section": "Cost optimization pillar > Optimizing over time > Lambda cost and performance optimization"
+    },
+    {
+      "id": "q16",
+      "type": "paraphrase",
+      "question": "My functions inside a private network pay for NAT gateways only to reach AWS APIs. Is there a cheaper option?",
+      "evidence": ["interface endpoints are more cost effective VPC structures compared to NAT and Internet gateways"],
+      "section": "Cost optimization pillar > Optimizing over time > Leverage VPC endpoints"
+    },
+    {
+      "id": "q17",
+      "type": "keyword",
+      "question": "When should DynamoDB use on-demand mode and when provisioned mode?",
+      "evidence": ["Use on-demand for unpredictable application traffic, otherwise provisioned mode for consistent traffic", "You can choose to use provisioned capacity if you have steady workloads with predictable growth"],
+      "section": "Cost optimization pillar > Optimizing over time > DynamoDB on-demand and provisioned capacity"
+    },
+    {
+      "id": "q18",
+      "type": "paraphrase",
+      "question": "Do I always need a function in between when my API just forwards data to another AWS service?",
+      "evidence": ["If your Lambda function is not performing custom logic while integrating with other AWS services, chances are that it may be unnecessary", "we can use an API Gateway service proxy to directly integrate with Firehose"],
+      "section": "Cost optimization pillar > Optimizing over time > Direct integrations"
+    },
+    {
+      "id": "q19",
+      "type": "keyword",
+      "question": "How can SNS message filtering avoid unnecessary Lambda invocations in a fan-out pattern?",
+      "evidence": ["Amazon SNS can filter events based on message attributes"],
+      "section": "Cost optimization pillar > Optimizing over time > Direct integrations"
+    },
+    {
+      "id": "q20",
+      "type": "paraphrase",
+      "question": "How should a client check on a long-running job without overloading the service with status requests?",
+      "evidence": ["establish SLAs with the clients to limit the number of empty polls", "the client should poll the API after two minutes with exponential backoff"],
+      "section": "Performance efficiency pillar > Optimize > AWS Step Functions > Serverless Event Submission with Status Updates"
+    },
+    {
+      "id": "q21",
+      "type": "keyword",
+      "question": "What does AWS X-Ray offer for troubleshooting a serverless application?",
+      "evidence": ["Active tracing with AWS X-Ray should be enabled to provide distributed tracing capabilities"],
+      "section": "Operational excellence pillar > Operate > Distributed tracing"
+    },
+    {
+      "id": "q22",
+      "type": "paraphrase",
+      "question": "How should I manage feature flags and other settings that change while the application runs?",
+      "evidence": ["Use AWS Systems Manager Parameter Store (SSM) or AWS AppConfig for dynamic configuration, such as feature toggles"],
+      "section": "Operational excellence pillar > Operate > Configuration"
+    },
+    {
+      "id": "q23",
+      "type": "keyword",
+      "question": "What happens to synchronous Lambda invocations that exceed the function's concurrency limit?",
+      "evidence": ["Synchronous invocations return an HTTP 429 error"],
+      "section": "Reliability pillar > Foundations > Throttling"
+    },
+    {
+      "id": "q24",
+      "type": "paraphrase",
+      "question": "How can I protect my API from injection attacks and cross-site scripting?",
+      "evidence": ["You can use AWS WAF to add protection of your APIs on the application network layer"],
+      "section": "Security pillar > Identity and access management"
+    },
+    {
+      "id": "q25",
+      "type": "paraphrase",
+      "question": "Should my integration tests use fake versions of cloud services?",
+      "evidence": ["Integration tests shouldn't mock services you can't control"],
+      "section": "Operational excellence pillar > Operate > Testing"
+    },
+    {
+      "id": "q26",
+      "type": "keyword",
+      "question": "How can the Saga pattern be implemented in a serverless application?",
+      "evidence": ["rolling back failed transactions as described by the Saga pattern also can be achieved by using Step Functions state machines"],
+      "section": "Reliability pillar > Failure management"
+    },
+    {
+      "id": "q27",
+      "type": "paraphrase",
+      "question": "Why is it a bad idea to have functions call each other in code to run a multi-step process?",
+      "evidence": ["Chaining Lambda executions within the code to orchestrate the workflow of your application results in a monolithic and tightly coupled application"],
+      "section": "Design principles"
+    },
+    {
+      "id": "q28",
+      "type": "keyword",
+      "question": "How do I increase Kinesis stream processing throughput with Lambda?",
+      "evidence": ["ParallelizationFactor setting to increase concurrency by processing multiple batches from each shard in parallel", "Increase the number of shards to directly increase the number of maximum concurrent Lambda function invocations"],
+      "section": "Performance efficiency pillar > Optimize > AWS Step Functions > Serverless Data Processing"
+    },
+    {
+      "id": "q29",
+      "type": "paraphrase",
+      "question": "How can I be sure the code that runs in production hasn't been tampered with?",
+      "evidence": ["AWS Signer integrates with AWS Lambda to sign the code"],
+      "section": "Security pillar > Data protection"
+    },
+    {
+      "id": "q30",
+      "type": "keyword",
+      "question": "What does question REL 1 cover?",
+      "evidence": ["REL 1: How are you regulating inbound request rates?"],
+      "section": "Reliability pillar > Foundations > Throttling"
+    }
+  ]
+}
